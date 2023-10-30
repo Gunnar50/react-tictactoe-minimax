@@ -1,20 +1,30 @@
 import React from "react";
 import Tile from "./Tile";
 
-function Board({ tiles }) {
+const BORDER_CLASSES = [
+	"border-right border-bottom",
+	"border-right border-bottom",
+	"border-bottom",
+	"border-right border-bottom",
+	"border-right border-bottom",
+	"border-bottom",
+	"border-right",
+	"border-right",
+	"",
+];
+
+function Board({ tiles, onTileClick }) {
 	return (
 		<div className="board">
-			<Tile value={tiles[0]} className="border-right border-bottom" />
-			<Tile value={tiles[1]} className="border-right border-bottom" />
-			<Tile value={tiles[2]} className="border-bottom" />
-
-			<Tile value={tiles[3]} className="border-right border-bottom" />
-			<Tile value={tiles[4]} className="border-right border-bottom" />
-			<Tile value={tiles[5]} className="border-bottom" />
-
-			<Tile value={tiles[6]} className="border-right" />
-			<Tile value={tiles[7]} className="border-right" />
-			<Tile value={tiles[8]} />
+			{tiles.map((tile, index) => (
+				<Tile
+					key={index}
+					value={tile}
+					onClick={() => onTileClick(index)}
+					className={BORDER_CLASSES[index]}
+				/>
+			))}
+			<div className="strike strike-diagonal-2"></div>
 		</div>
 	);
 }
