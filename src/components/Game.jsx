@@ -10,7 +10,8 @@ import GameStats from "./GameStats";
 
 function Game() {
 	const [tiles, setTiles] = useState(Array(9).fill(null));
-	const [playerTurn, setPlayerTurn] = useState(Math.floor(Math.random() * 2));
+	const [playerTurn, setPlayerTurn] = useState(1);
+	const [startingPlayer, setStartingPlayer] = useState(playerTurn);
 	const [winnerStrikeClass, setWinnerStrikeClass] = useState("");
 	const [gameState, setGameState] = useState(GameState.inGame);
 	const [gameStats, setGameStats] = useState({
@@ -76,7 +77,8 @@ function Game() {
 
 	const handleNewGame = () => {
 		setTiles(Array(9).fill(null));
-		setPlayerTurn(Math.floor(Math.random() * 2));
+		setPlayerTurn(!startingPlayer);
+		setStartingPlayer(!startingPlayer);
 		setGameState(GameState.inGame);
 		setWinnerStrikeClass(null);
 	};
