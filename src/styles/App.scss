@@ -1,3 +1,14 @@
+@font-face {
+	font-family: "Rocko";
+	src: url(../assets/font/RockoFLF-Bold_1.woff);
+	font-weight: 600;
+}
+@font-face {
+	font-family: "Rocko";
+	src: url(../assets/font/RockoUltraFLF.woff);
+	font-weight: 700;
+}
+
 :root {
 	--main-bg: #82bfc4;
 	--primary: #022038;
@@ -11,13 +22,14 @@
 	box-sizing: border-box;
 }
 
-/* Make images easier to work with */
 img {
 	display: block;
 	max-width: 100%;
 }
 
 body {
+	font-family: "Rocko";
+	font-weight: 700;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -29,6 +41,22 @@ body {
 	padding: 1rem;
 	text-align: center;
 	border-radius: 20px;
+	h1 {
+		font-size: 3rem;
+		margin-top: 0;
+	}
+}
+
+.stats {
+	font-size: 1.2rem;
+	p {
+		margin-top: 0;
+	}
+	.scores {
+		padding: 0 1rem;
+		display: flex;
+		justify-content: space-between;
+	}
 }
 
 .board {
@@ -36,6 +64,7 @@ body {
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-template-rows: 1fr 1fr 1fr;
 	position: relative;
+	margin-top: 2rem;
 }
 
 .tile {
