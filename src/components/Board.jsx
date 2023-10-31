@@ -13,7 +13,7 @@ const BORDER_CLASSES = [
 	"",
 ];
 
-function Board({ tiles, onTileClick }) {
+function Board({ tiles, onTileClick, strikeClass }) {
 	return (
 		<div className="board">
 			{tiles.map((tile, index) => (
@@ -24,7 +24,7 @@ function Board({ tiles, onTileClick }) {
 					className={BORDER_CLASSES[index]}
 				/>
 			))}
-			<div className="strike strike-diagonal-2"></div>
+			<div className={`strike ${strikeClass}`}></div>
 		</div>
 	);
 }
