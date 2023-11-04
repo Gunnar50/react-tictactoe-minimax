@@ -24,9 +24,10 @@ export const checkWinner = (board, setStrikeClass) => {
 		setStrikeClass("strike-diagonal-2");
 		return board[2];
 	}
+	if (isBoardFull(board)) return "tie";
 	return false;
 };
 
-export const isBoardFull = (board) => {
+export function isBoardFull(board) {
 	return board.every((tile) => tile !== null);
-};
+}
