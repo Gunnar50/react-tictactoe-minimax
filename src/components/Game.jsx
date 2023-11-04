@@ -4,12 +4,13 @@ import PLAYER_X from "../assets/images/player-x.png";
 import { checkWinner, isBoardFull } from "../util/checkWinner";
 import { generateAIEasy, generateAIHard } from "../util/computerAI";
 import { GameState } from "../util/gameState";
+import { bestMove } from "../util/minimax";
 import Board from "./Board";
 import GameOver from "./GameOver";
 import GameStats from "./GameStats";
 
 function Game() {
-	const [tiles, setTiles] = useState(Array(9).fill(null));
+	const [board, setBoard] = useState(Array(9).fill(null));
 	const [playerTurn, setPlayerTurn] = useState(1);
 	const [startingPlayer, setStartingPlayer] = useState(playerTurn);
 	const [winnerStrikeClass, setWinnerStrikeClass] = useState("");
@@ -22,9 +23,9 @@ function Game() {
 	});
 
 	const makeMove = (index) => {
-		const newTiles = [...tiles];
-		newTiles[index] = playerTurn ? PLAYER_X : PLAYER_O;
-		setTiles(newTiles);
+		const newBoard = [...board];
+		newBoard[index] = playerTurn ? PLAYER_X : PLAYER_O;
+		setBoard(newBoard);
 		setPlayerTurn(!playerTurn);
 	};
 
@@ -47,7 +48,7 @@ function Game() {
 	};
 
 	useEffect(() => {
-		const winner = checkWinner(tiles, setWinnerStrikeClass);
+		const winner = checkWinner(board, setWinnerStrikeClass);
 		let updatedGameState = gameState;
 
 		if (winner) {
@@ -57,26 +58,27 @@ function Game() {
 			updateStats(updatedGameState);
 			return;
 		}
-		if (isBoardFull(tiles)) {
+		if (isBoardFull(board)) {
 			setGameState(GameState.tie);
 			updateStats(GameState.tie);
 			return;
 		}
 		if (!playerTurn) {
-			const computerMove = generateAIHard(tiles);
+			// const computerMove = generateAIHard(board);
+			const computerMove = bestMove(board);
 			makeMove(computerMove);
 		}
-	}, [tiles]);
+	}, [board]);
 
 	const handleTileClick = (index) => {
 		if (gameState !== GameState.inGame || !playerTurn) return; // return if game state is not in game
-		if (tiles[index] !== null) return; // return if tile is not null
+		if (board[index] !== null) return; // return if tile is not null
 
 		makeMove(index);
 	};
 
 	const handleNewGame = () => {
-		setTiles(Array(9).fill(null));
+		setBoard(Array(9).fill(null));
 		setPlayerTurn(!startingPlayer);
 		setStartingPlayer(!startingPlayer);
 		setGameState(GameState.inGame);
@@ -88,7 +90,7 @@ function Game() {
 			<h1>Tic-Tac-Toe</h1>
 			<GameStats gameStats={gameStats} />
 			<Board
-				tiles={tiles}
+				board={board}
 				onTileClick={handleTileClick}
 				strikeClass={winnerStrikeClass}
 			/>
