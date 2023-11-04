@@ -13,10 +13,10 @@ const BORDER_CLASSES = [
 	"",
 ];
 
-function Board({ tiles, onTileClick, strikeClass }) {
+function Board({ board, onTileClick, strikeClass }) {
 	return (
 		<div className="board">
-			{tiles.map((tile, index) => (
+			{board.map((tile, index) => (
 				<Tile
 					key={index}
 					value={tile}
