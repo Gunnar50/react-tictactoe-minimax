@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import PLAYER_O from "../assets/images/player-o.png";
-import PLAYER_X from "../assets/images/player-x.png";
 import { checkWinner, isBoardFull } from "../util/checkWinner";
 import { generateAIEasy, generateAIHard } from "../util/computerAI";
 import { GameState } from "../util/gameState";
@@ -9,9 +7,12 @@ import Board from "./Board";
 import GameOver from "./GameOver";
 import GameStats from "./GameStats";
 
+const PLAYER_X = "X";
+const PLAYER_O = "O";
+
 function Game() {
 	const [board, setBoard] = useState(Array(9).fill(null));
-	const [playerTurn, setPlayerTurn] = useState(1);
+	const [playerTurn, setPlayerTurn] = useState(true);
 	const [startingPlayer, setStartingPlayer] = useState(playerTurn);
 	const [winnerStrikeClass, setWinnerStrikeClass] = useState("");
 	const [gameState, setGameState] = useState(GameState.inGame);
@@ -53,7 +54,11 @@ function Game() {
 
 		if (winner) {
 			updatedGameState =
-				winner === PLAYER_X ? GameState.playerWin : GameState.computerWin;
+				winner === PLAYER_X
+					? GameState.playerWin
+					: winner === PLAYER_O
+					? GameState.computerWin
+					: GameState.tie;
 			setGameState(updatedGameState);
 			updateStats(updatedGameState);
 			return;
