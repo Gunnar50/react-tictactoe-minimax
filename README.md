@@ -6,7 +6,7 @@ This personal project is a classic Tic-Tac-Toe game developed using React, featu
 
 ### 🏠 [Demo Link](https://tictactoe-gustavo-passarella.netlify.app/)
 
-![main page](images/main.png)
+![main page](src/assets/images/main.png)
 
 ## ✨ Features
 
