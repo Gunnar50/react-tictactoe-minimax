@@ -8,6 +8,11 @@ This personal project is a classic Tic-Tac-Toe game developed using React, featu
 
 ![main page](src/assets/images/main.png)
 
+## TODO:
+- add options for easy, medium and hard
+- add options for no AI
+- convert to TypeScript
+
 ## ✨ Features
 
 - **Single-Player Mode:** Play against a challenging AI opponent.
